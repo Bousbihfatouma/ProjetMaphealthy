@@ -41,37 +41,41 @@ modal.addEventListener('close', function () {
     }
 });
 
+
+
+
+
 function ajoutMarker(w , x, y, z, coordonnée) {
 if (checkVegan.checked){
      tableauVegan.push({
-        titre : x,
-        adresse : y,
-        infosite : z,
-        description: w,
+        titre : w,
+        adresse : x,
+        infosite : y,
+        description: z,
         coordonnée : coordonnée
-    })
+    }),
     console.log(tableauVegan);
     // Enregistre tableauMarker dans le localstorage avec le nom savetableauMarker
     localStorage.setItem('savetableauVegan', JSON.stringify(tableauVegan));
 }
 else if (checkSansGluten.checked){
     tableauSansGluten.push({
-       titre : x,
-       adresse : y,
-       infosite : z,
-       description: w,
+       titre : w,
+       adresse : x,
+       infosite : y,
+       description: z,
        coordonnée : coordonnée
    })
    console.log(tableauSansGluten);
    // Enregistre tableauMarker dans le localstorage avec le nom savetableauMarker
    localStorage.setItem('savetableauSansGluten', JSON.stringify(tableauSansGluten));
 }
-else(checkSansLactose.checked);{
+else if (checkSansLactose.checked){
     tableauSansLactose.push({
-       titre : x,
-       adresse : y,
-       infosite : z,
-       description: w,
+       titre : w,
+       adresse : x,
+       infosite : y,
+       description: z,
        coordonnée : coordonnée
    })
    console.log(tableauSansLactose);
@@ -85,10 +89,11 @@ var tableauVegan = JSON.parse(localStorage.getItem('savetableauVegan')) || [];
 var tableauSansGluten = JSON.parse(localStorage.getItem('savetableauSansGluten')) || [];
 var tableauSansLactose = JSON.parse(localStorage.getItem('savetableauSansLactose')) || [];
 
+
 // var tableauMarker = JSON.parse(localStorage.getItem('savetableauMarker')) || [];
-var savedMarkersVegan = localStorage.getItem('savetableauMarkerVegan');
-var savedMarkersSansGluten = localStorage.getItem('savetableauMarkerSansGluten');
-var savedMarkersSansLactose = localStorage.getItem('savetableauMarkerSansLactose');
+var savedMarkersVegan = localStorage.getItem('savetableauVegan');
+var savedMarkersSansGluten = localStorage.getItem('savetableauSansGluten');
+var savedMarkersSansLactose = localStorage.getItem('savetableauSansLactose');
 
 if (savedMarkersVegan) {
     savedMarkersVegan = JSON.parse(savedMarkersVegan);
