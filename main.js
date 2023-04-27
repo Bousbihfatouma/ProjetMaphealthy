@@ -37,7 +37,7 @@ map.on('click', onMapClick);
 modal.addEventListener('close', function () {
     console.log(modal.returnValue);
     if (modal.returnValue == 'oui') {
-        ajoutMarker(inputTitre.value, inputAdresse.value, inputSite, inputDescription);
+        ajoutMarker(inputTitre.value, inputAdresse.value, inputSite.value, inputDescription.value,coordonnée);
     }
 });
 
