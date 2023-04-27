@@ -219,7 +219,6 @@ h3, h2{
 }
 h2{
     background-color: #13be03;
-    border-radius: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     color: gainsboro; 
@@ -297,7 +296,7 @@ container{
 }
 
 .container-map-buttons {
-    background-image: url(backgroundcitron.png);
+    background-image: url(/img/backgroundcitron.png);
     background-position: center;
     background-size: 90%;
     background-repeat: no-repeat;
