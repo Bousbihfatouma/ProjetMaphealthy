@@ -229,7 +229,6 @@ h4{font-family: 'inter';
     font-size: 1.8em;
     font-weight: bold;
     color: #6cb37a;
-
 }
 
 p{
@@ -297,7 +296,7 @@ container{
 }
 
 .container-map-buttons {
-    background-image: url(backgroundcitron.png);
+    background-image: url(/img/backgroundcitron.png);
     background-position: center;
     background-size: 90%;
     background-repeat: no-repeat;
@@ -384,7 +383,6 @@ input{
 /* start footer */
 .footer {
     background-color: #f2f2f2;
-    padding: 20px;
     border-radius: 5px;
     margin: 30px ;
     color:#6a9f62; 
@@ -418,7 +416,6 @@ input{
 .bottoms{
     display: flex;
     gap: 450px;	
-    
 }
 
 .mail:hover{
@@ -439,7 +436,6 @@ input{
 /* Start copyright line  */
 .copyright {
     margin-top: 20px;
-    padding:  -0px;
     display: flex;
     justify-content: space-between;
 }
@@ -450,13 +446,13 @@ input{
       -o-transition: all 0.3s linear;
       transition: all 0.3s linear;
  }
+ 
     .copyright a:hover {
       color:#52c16f; }
   
       .copyright-container{
         width: 100%;
         margin: 0 auto;
-        padding: 20px;
         font-family: 'inter';
         background-color: #fff;
       }
@@ -468,10 +464,7 @@ input{
 
       }
   .copyright-menu ul {
-    text-align: right;
-    margin-bottom: 0px;
-    margin-top: 0px; 
-    
+    text-align: right; 
          }
   
   .copyright-menu li {
