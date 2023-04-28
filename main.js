@@ -41,10 +41,6 @@ modal.addEventListener('close', function () {
     }
 });
 
-
-
-
-
 function ajoutMarker(w , x, y, z, coordonnée) {
 if (checkVegan.checked){
      tableauVegan.push({
@@ -89,7 +85,6 @@ var tableauVegan = JSON.parse(localStorage.getItem('savetableauVegan')) || [];
 var tableauSansGluten = JSON.parse(localStorage.getItem('savetableauSansGluten')) || [];
 var tableauSansLactose = JSON.parse(localStorage.getItem('savetableauSansLactose')) || [];
 
-
 // var tableauMarker = JSON.parse(localStorage.getItem('savetableauMarker')) || [];
 var savedMarkersVegan = localStorage.getItem('savetableauVegan');
 var savedMarkersSansGluten = localStorage.getItem('savetableauSansGluten');
@@ -119,9 +114,6 @@ else if (savedMarkersSansLactose) {
         newMarker.bindPopup("<strong>" + marker.titre + "</strong><br>" + marker.info);
     });
 };
-
-
-
 
 // //On récupère les valeurs des input de l'utilisateur
 // let vegan = document.getElementById("vegan")
