@@ -27,11 +27,12 @@ catch (error) {
     tableauMarker = [];
     // et on ne fait rien avec l'erreur
 }
-function onMapclick(e) {
+function onMapClick(e) {
     coordonnée= e.latlng;
     modal.showModal();
 }
-map.on('click', onMapClick)
+map.on('click', onMapClick);
+
 modal.addEventListener('close', function () {
     console.log(modal.returnValue)
     if (modal.returnValue === 'oui') {
@@ -40,17 +41,18 @@ modal.addEventListener('close', function () {
             adresse: inputAdresse.value,
             site: inputSite.value,
             description: inputDescription.value,
+            vegan:vegan.value, 
             coordonnée: coordonnée
         });
 
         localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
-        ajoutMarkerSurLaMap(inputTitre.value, inputAdresse.value, inputSite.value, inputDescription, coordonnée);
+        ajoutMarkerSurLaMap(inputTitre.value, inputAdresse.value, inputSite.value, inputDescription.value, coordonnée);
     }
 });
 
 // on charge les marqueurs du localstorage
 for (var i = 0; i < tableauMarker.length; i++) {
-    ajoutMarkerSurLaMap(tableauMarker[i].titre, tableauMarker[i].adresse, tableauMarker[i].site,tableauMarker[i].description,  tableauMarker[i].coordonnée);
+    ajoutMarkerSurLaMap(tableauMarker[i].titre, tableauMarker[i].adresse, tableauMarker[i].site, tableauMarker[i].description,  tableauMarker[i].coordonnée);
 }
 
 function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée) {
