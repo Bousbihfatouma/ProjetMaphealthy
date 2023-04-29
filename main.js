@@ -5,7 +5,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 30,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
 // Récupération des élements html
 var modal = document.querySelector('#laModale');
 var inputTitre = document.querySelector('#titre');
@@ -17,7 +16,6 @@ var sansGluten = document.querySelector('input[id="resto-sansgluten"]');
 var sansLactose = document.querySelector('input[id="resto-sanslactose"]');
 var coordonnée
 var tableauMarker
-
 try {
     // on essaye de récupérer le tableau dans le localstorage
     tableauMarker = JSON.parse(localStorage.getItem('savetableauMarker')) || [];
@@ -27,11 +25,11 @@ catch (error) {
     tableauMarker = [];
     // et on ne fait rien avec l'erreur
 }
-function onMapclick(e) {
+function onMapClick(e) {
     coordonnée= e.latlng;
     modal.showModal();
 }
-map.on('click', onMapClick)
+map.on('click', onMapClick);
 modal.addEventListener('close', function () {
     console.log(modal.returnValue)
     if (modal.returnValue === 'oui') {
@@ -40,19 +38,17 @@ modal.addEventListener('close', function () {
             adresse: inputAdresse.value,
             site: inputSite.value,
             description: inputDescription.value,
+            vegan:vegan.value,
             coordonnée: coordonnée
         });
-
         localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
-        ajoutMarkerSurLaMap(inputTitre.value, inputAdresse.value, inputSite.value, inputDescription, coordonnée);
+        ajoutMarkerSurLaMap(inputTitre.value, inputAdresse.value, inputSite.value, inputDescription.value, coordonnée);
     }
 });
-
 // on charge les marqueurs du localstorage
 for (var i = 0; i < tableauMarker.length; i++) {
-    ajoutMarkerSurLaMap(tableauMarker[i].titre, tableauMarker[i].adresse, tableauMarker[i].site,tableauMarker[i].description,  tableauMarker[i].coordonnée);
+    ajoutMarkerSurLaMap(tableauMarker[i].titre, tableauMarker[i].adresse, tableauMarker[i].site, tableauMarker[i].description,  tableauMarker[i].coordonnée);
 }
-
 function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée) {
     var marker = new L.Marker([coordonnée.lat, coordonnée.lng]).addTo(map);
     marker.bindPopup(
@@ -64,7 +60,6 @@ function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée) {
         // + '<img src="' + image + '" alt="' + titre + '">'
     );
 }
-
 function supprimeMarker(lat, lng) {
     map.eachLayer(function (layer) {
         if (layer instanceof L.Marker) {
@@ -73,10 +68,8 @@ function supprimeMarker(lat, lng) {
             }
         }
     });
-
     tableauMarker = tableauMarker.filter(function (marker) {
         return marker.coordonnée.lat !== lat || marker.coordonnée.lng !== lng;
     });
-    
     localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
 }
