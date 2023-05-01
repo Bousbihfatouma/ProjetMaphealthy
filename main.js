@@ -106,9 +106,9 @@ function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée, veg
     // Création d'une icône personnalisée
     var myIcon = L.icon({
         iconUrl: monIcone,
-        iconSize: [30, 30], // taille de l'icône
-        iconAnchor: [15, 30], // position de l'ancre de l'icône
-        popupAnchor: [0, -30] // position de l'ancre de la popup
+        iconSize: [30, 45], // taille de l'icône
+        iconAnchor: [12, 41], // position de l'ancre de l'icône
+        popupAnchor: [0, -41] // position de l'ancre de la popup
     });
     var marker = new L.Marker([coordonnée.lat, coordonnée.lng], {icon: myIcon}).addTo(map);
     marker.bindPopup(

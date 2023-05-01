@@ -148,10 +148,15 @@ li.dropdown {
 	text-decoration: none;
   }
 
-.s2 p{
+.s2 p, label{
     font-family:'inter';
 	height: 7px;
  }
+
+ label{
+    color: #3c6845;
+}
+
 
 .s2{
     color: #6a9f62;
