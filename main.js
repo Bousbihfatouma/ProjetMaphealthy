@@ -47,7 +47,7 @@ function onMapClick(e) {
     coordonnée= e.latlng;
     modal.showModal();
 }
-map.on('click', onMapClick);;
+map.on('click', onMapClick);
 
 modal.addEventListener('close', function () {
     console.log(modal.returnValue)
