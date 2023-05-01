@@ -183,8 +183,6 @@ btnvegan.addEventListener('click', function () {
     }
 });
 
-
-var btnsansgluten = document.querySelector('#sans-gluten');
 btnsansgluten.addEventListener('click', function () {
     console.log("ICI")
     // suppression des marqueurs existants sur la carte

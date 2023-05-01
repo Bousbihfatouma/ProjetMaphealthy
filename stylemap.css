@@ -157,7 +157,6 @@ li.dropdown {
     color: #3c6845;
 }
 
-
 .s2{
     color: #6a9f62;
 	height: 50px;
@@ -223,11 +222,11 @@ h3, h2{
     color: #3c6845;
 }
 h2{
-    background-color: #13be03;
+    background-color: #6cb37a;
     border-radius: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: gainsboro; 
+    color: rgb(0, 0, 0); 
 }
 
 h4{font-family: 'inter';
