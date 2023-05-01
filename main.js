@@ -57,31 +57,62 @@ modal.addEventListener('close', function () {
             adresse: inputAdresse.value,
             site: inputSite.value,
             description: inputDescription.value,
-            vegan:vegan.value,
-            vegan:vegan.value, 
-            coordonnée: coordonnée
+            coordonnée,
+            vegan:vegan.checked,
+            sansLactose: sansLactose.checked,
+            sansGluten: sansGluten.checked
         });
         localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
-        ajoutMarkerSurLaMap(inputTitre.value, inputAdresse.value, inputSite.value, inputDescription.value, coordonnée);
+        ajoutMarkerSurLaMap(
+            inputTitre.value, 
+            inputAdresse.value, 
+            inputSite.value, 
+            inputDescription.value,
+            coordonnée,
+            vegan.checked, 
+            sansGluten.checked,
+            sansLactose.checked
+            );
     }
 });
 
 
 // on charge les marqueurs du localstorage
 for (var i = 0; i < tableauMarker.length; i++) {
-    ajoutMarkerSurLaMap(tableauMarker[i].titre, tableauMarker[i].adresse, tableauMarker[i].site, tableauMarker[i].description,  tableauMarker[i].coordonnée);
+    ajoutMarkerSurLaMap(tableauMarker[i].titre, 
+        tableauMarker[i].adresse,
+         tableauMarker[i].site, 
+         tableauMarker[i].description,  
+         tableauMarker[i].coordonnée,
+         tableauMarker[i].vegan,
+         tableauMarker[i].sansGluten,
+         tableauMarker[i].sansLactose);
 }
 
 
-function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée) {
-    var marker = new L.Marker([coordonnée.lat, coordonnée.lng]).addTo(map);
+function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée, veganChecked, sansGlutenChecked, sansLactoseChecked) {
+    var monIcone;
+    if (veganChecked) {
+        monIcone = 'img/vegan-marker.png';
+    } else if (sansGlutenChecked) {
+        monIcone = 'img/sans-gluten-marker.png';
+    } else if (sansLactoseChecked) {
+        monIcone = 'img/sans-lactose-marker.png';
+    }
+    // Création d'une icône personnalisée
+    var myIcon = L.icon({
+        iconUrl: monIcone,
+        iconSize: [30, 30], // taille de l'icône
+        iconAnchor: [15, 30], // position de l'ancre de l'icône
+        popupAnchor: [0, -30] // position de l'ancre de la popup
+    });
+    var marker = new L.Marker([coordonnée.lat, coordonnée.lng], {icon: myIcon}).addTo(map);
     marker.bindPopup(
         '<h2>' + titre + '</h2>'
-        + '<p><a style="cursor: pointer" onclick="supprimeMarker('+ coordonnée.lat + ', ' + coordonnée.lng + ')">Supprimer</a></p>'
         + '<p>' + adresse + '</p>'
         + '<p>' + site + '</p>'
         + '<p>' + description + '</p>'
-        // + '<img src="' + image + '" alt="' + titre + '">'
+        + '<p><a style="cursor: pointer" onclick="supprimeMarker('+ coordonnée.lat + ', ' + coordonnée.lng + ')">Supprimer</a></p>'
     );
 }
 
@@ -101,3 +132,118 @@ function supprimeMarker(lat, lng) {
     });
     localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
 }
+
+
+var btnvegan = document.querySelector('#vegan');
+var btnsansgluten = document.querySelector('#sans-gluten');
+var btnsanslactose = document.querySelector('#sans-lactose');
+var btnaffichertous = document.querySelector('#afficher');
+
+btnvegan.addEventListener('click', function () {
+    console.log("ICI")
+    // suppression des marqueurs existants sur la carte
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+    for (var i = 0; i < tableauMarker.length; i++) {
+        if (tableauMarker[i].vegan) {
+            var marker = tableauMarker[i];
+            {
+                ajoutMarkerSurLaMap(
+                    marker.titre,
+                    marker.adresse,
+                    marker.site,
+                    marker.description,
+                    marker.coordonnée,
+                    marker.vegan,
+                    marker.sansGluten,
+                    marker.sansLactose
+                );
+            }
+        }
+    }
+});
+
+
+var btnsansgluten = document.querySelector('#sans-gluten');
+btnsansgluten.addEventListener('click', function () {
+    console.log("ICI")
+    // suppression des marqueurs existants sur la carte
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+    for (var i = 0; i < tableauMarker.length; i++) {
+        if (tableauMarker[i].sansGluten) {
+            var marker = tableauMarker[i];
+            {
+                ajoutMarkerSurLaMap(
+                    marker.titre,
+                    marker.adresse,
+                    marker.site,
+                    marker.description,
+                    marker.coordonnée,
+                    marker.vegan,
+                    marker.sansGluten,
+                    marker.sansLactose
+                );
+            }
+        }
+    }
+});
+
+btnsanslactose.addEventListener('click', function () {
+    console.log("ICI")
+    // suppression des marqueurs existants sur la carte
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+    for (var i = 0; i < tableauMarker.length; i++) {
+        if (tableauMarker[i].sansLactose) {
+            var marker = tableauMarker[i];
+            {
+                ajoutMarkerSurLaMap(
+                    marker.titre,
+                    marker.adresse,
+                    marker.site,
+                    marker.description,
+                    marker.coordonnée,
+                    marker.vegan,
+                    marker.sansGluten,
+                    marker.sansLactose
+                );
+            }
+        }
+
+    }
+});
+
+
+btnaffichertous.addEventListener('click', function () {
+    // suppression des marqueurs existants sur la carte
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+    for (var i = 0; i < tableauMarker.length; i++) {
+        var marker = tableauMarker[i];
+        {
+            ajoutMarkerSurLaMap(
+                marker.titre,
+                marker.adresse,
+                marker.site,
+                marker.description,
+                marker.coordonnée,
+                marker.vegan,
+                marker.sansGluten,
+                marker.sansLactose
+            );
+        }
+    }
+});
