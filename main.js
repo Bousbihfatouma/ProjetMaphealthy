@@ -17,7 +17,8 @@ var vegan = document.querySelector('input[id="resto-vegan"]');
 var sansGluten = document.querySelector('input[id="resto-sansgluten"]');
 var sansLactose = document.querySelector('input[id="resto-sanslactose"]');
 var coordonnée
-
+var inputImage = document.querySelector('#image');
+var preview = document.querySelector('#preview');
 
 var tableauMarker = [];
 
@@ -60,7 +61,8 @@ modal.addEventListener('close', function () {
             coordonnée,
             vegan:vegan.checked,
             sansLactose: sansLactose.checked,
-            sansGluten: sansGluten.checked
+            sansGluten: sansGluten.checked,
+            image: preview.src
         });
         localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
         ajoutMarkerSurLaMap(
@@ -71,7 +73,8 @@ modal.addEventListener('close', function () {
             coordonnée,
             vegan.checked, 
             sansGluten.checked,
-            sansLactose.checked
+            sansLactose.checked,
+            preview.src
             );
     }
 });
@@ -86,11 +89,12 @@ for (var i = 0; i < tableauMarker.length; i++) {
          tableauMarker[i].coordonnée,
          tableauMarker[i].vegan,
          tableauMarker[i].sansGluten,
-         tableauMarker[i].sansLactose);
+         tableauMarker[i].sansLactose,
+         tableauMarker[i].image);
 }
 
 
-function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée, veganChecked, sansGlutenChecked, sansLactoseChecked) {
+function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée, veganChecked, sansGlutenChecked, sansLactoseChecked,image) {
     var monIcone;
     if (veganChecked) {
         monIcone = 'img/vegan-marker.png';
@@ -112,6 +116,7 @@ function ajoutMarkerSurLaMap(titre, adresse, site, description, coordonnée, veg
         + '<p>' + adresse + '</p>'
         + '<p>' + site + '</p>'
         + '<p>' + description + '</p>'
+        + '<p><img src="' + image + '" style="max-width: 150px;"></p>'
         + '<p><a style="cursor: pointer" onclick="supprimeMarker('+ coordonnée.lat + ', ' + coordonnée.lng + ')">Supprimer</a></p>'
     );
 }
@@ -132,6 +137,17 @@ function supprimeMarker(lat, lng) {
     });
     localStorage.setItem('savetableauMarker_v2', JSON.stringify(tableauMarker));
 }
+
+inputImage.addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+  
+    reader.onload = function(event) {
+      preview.src = event.target.result;
+    };
+  
+    reader.readAsDataURL(file);
+  });
 
 
 var btnvegan = document.querySelector('#vegan');
@@ -159,7 +175,8 @@ btnvegan.addEventListener('click', function () {
                     marker.coordonnée,
                     marker.vegan,
                     marker.sansGluten,
-                    marker.sansLactose
+                    marker.sansLactose,
+                    marker.image
                 );
             }
         }
@@ -188,7 +205,8 @@ btnsansgluten.addEventListener('click', function () {
                     marker.coordonnée,
                     marker.vegan,
                     marker.sansGluten,
-                    marker.sansLactose
+                    marker.sansLactose,
+                    marker.image
                 );
             }
         }
@@ -215,7 +233,8 @@ btnsanslactose.addEventListener('click', function () {
                     marker.coordonnée,
                     marker.vegan,
                     marker.sansGluten,
-                    marker.sansLactose
+                    marker.sansLactose,
+                    marker.image
                 );
             }
         }
@@ -242,7 +261,8 @@ btnaffichertous.addEventListener('click', function () {
                 marker.coordonnée,
                 marker.vegan,
                 marker.sansGluten,
-                marker.sansLactose
+                marker.sansLactose,
+                marker.image
             );
         }
     }
